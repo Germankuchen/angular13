@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { YoutubeService } from './services/youtube.service';
-
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -17,7 +17,8 @@ import { YoutubeService } from './services/youtube.service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [YoutubeService],
   bootstrap: [AppComponent]
