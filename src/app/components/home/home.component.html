@@ -1,2 +1,12 @@
 <h1>YouTube Videos</h1>
 <hr>
+
+<div class="card-columns">
+    <div class="card" *ngFor="let video of videos">
+        <img [src]="video.imagenURL" class="card-img-top" alt="Falta la imagen papá que queres que haga">
+        <div class="card-body">
+            <h5 class="card-title">{{video.titulo}}</h5>
+            <button class="btn btn-outline-primary btn-block" (click)="verVideo(video.id)">Reproducir</button>
+        </div>
+    </div>
+</div>
