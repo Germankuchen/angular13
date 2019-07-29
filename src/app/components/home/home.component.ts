@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { YoutubeService } from 'src/app/services/youtube.service';
 import { Video } from '../../classes/video.class';
 
+declare var $: any;
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -11,6 +13,7 @@ export class HomeComponent implements OnInit {
 
   nextPageToken: string;
   videos: Video[] = [];
+  videoSeleccionado: Video = new Video('', '', '');
 
   constructor(public _youTubeService: YoutubeService) { 
     this._youTubeService.getVideos().subscribe(info => {
@@ -25,8 +28,11 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  verVideo(id: string) {
-    console.log(id);
+  verVideo(videoElegido: Video) {
+    console.log('Se eligio el video: ' + videoElegido.id);
+    this.videoSeleccionado = videoElegido;
+    this.videoSeleccionado.src = 'http://www.youtube.com/embed/' + this.videoSeleccionado.id + '?autoplay=1';
+    $('#exampleModal').modal();
   }
 
   ngOnInit() {
