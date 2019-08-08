@@ -21,11 +21,11 @@
           </button>
             </div>
             <div class="modal-body">
-                <iframe id="ytplayer" type="text/html" width="640" height="360" src="http://www.youtube.com/embed/0S3enulCT8E?autoplay=1" frameborder="0">
+                <iframe id="ytplayer" type="text/html" width="100%" height="360" [src]="videoSeleccionado.src | videoYoutube" frameborder="0">
           </iframe>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-secondary" (click)="cerrarModal()">Cerrar</button>
             </div>
         </div>
     </div>
