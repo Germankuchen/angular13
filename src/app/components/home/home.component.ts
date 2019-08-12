@@ -16,10 +16,19 @@ export class HomeComponent implements OnInit {
   videoSeleccionado: Video = new Video('', '', '');
 
   constructor(public _youTubeService: YoutubeService) { 
-    this._youTubeService.getVideos().subscribe(info => {
-      console.log(info);
+    this._youTubeService.getVideos(this.nextPageToken).subscribe(info => {
       this.nextPageToken = info['nextPageToken'];
-      console.log('La próxima página puede ser devuelta con el siguiente token: ' + this.nextPageToken);
+      for (let videoNum = 0; videoNum < info['items'].length; videoNum++) {
+        const video = new Video(info['items'][videoNum].snippet.thumbnails.high.url, info['items'][videoNum].snippet.resourceId.videoId,
+          info['items'][videoNum].snippet.title);
+        this.videos.push(video);
+      }
+    });
+  }
+
+  cargarMas() {
+    this._youTubeService.getVideos(this.nextPageToken).subscribe(info => {
+      this.nextPageToken = info['nextPageToken'];
       for (let videoNum = 0; videoNum < info['items'].length; videoNum++) {
         const video = new Video(info['items'][videoNum].snippet.thumbnails.high.url, info['items'][videoNum].snippet.resourceId.videoId,
           info['items'][videoNum].snippet.title);

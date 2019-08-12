@@ -13,8 +13,13 @@ export class YoutubeService {
 
   constructor(public http: HttpClient) { }
 
-  getVideos() {
-    return this.http.get(this.urlYoutube + 'playlistItems?playlistId=' + this.canalID + '&maxResults=20&part=snippet&key=' + this.apikey);
+  getVideos(token: string) {
+    if (token) {
+      return this.http.get(this.urlYoutube + 'playlistItems?playlistId=' + this.canalID + '&maxResults=20&part=snippet&key=' + this.apikey + 
+      '&pageToken=' + token);
+    } else {
+      return this.http.get(this.urlYoutube + 'playlistItems?playlistId=' + this.canalID + '&maxResults=20&part=snippet&key=' + this.apikey);
+    }
   }
 
 }
